@@ -1,13 +1,16 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 
 export default function Hero() {
+  const [imgLoaded, setImgLoaded] = useState(false);
+
   return (
     <section className="bg-[#F8F4EF] py-20 px-6 md:px-12 lg:px-20">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
         {/* Left Text Section */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={imgLoaded ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="space-y-6"
         >
@@ -33,15 +36,18 @@ export default function Hero() {
         {/* Right Photo */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={imgLoaded ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.1 }}
           className="relative w-full flex justify-center"
         >
           <div className="bg-white shadow-lg rounded-2xl p-4 md:p-6 border border-[#E6E2DD]">
             <img
-              src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.1.0"
               alt="Real Estate Agent"
               className="rounded-xl object-cover w-full h-[380px] md:h-[450px]"
+              loading="lazy"
+              decoding="async"
+              onLoad={() => setImgLoaded(true)}
             />
           </div>
         </motion.div>
